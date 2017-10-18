@@ -12,7 +12,7 @@ void MatHadamardAfficher(int ** Matrice, int taille){
 			printf("%i ");
 		}
 		printf("\n");
-	} 
+	}
 
 }
 
@@ -28,7 +28,7 @@ int ** MatHadamardRenverser( int ** Matrice; int taille){
 }
 
 int TailleMatrice(int NbUtilisateur){
-	
+
 	int i = 2;
 	int marq = 0;
 	if( NbUtilisateur == 1) return 1;
@@ -41,41 +41,36 @@ int TailleMatrice(int NbUtilisateur){
 		}
 	}
 	return i;
-	
+
 }
 
 
 int ** MatHadamardCreer(int NbUtilisateur){
 
 	int indice = 1;
-	
+
 	int taille = TailleMatrice(NbUtilisateur);
 
 	int Mat[taille][taille];
 
 	Mat[0][0] = 1;
-	Mat[0][1] = 1;
-	Mat[1][0] = 1;
-	Mat[1][1] = -1;
-	
+
 	int i = 0;
 	int j = 0;
 
 	while(indice < taille){
 
-
-
 		for(; i < indice; i++){
 			for(; < indice; j++){
-				if(!(i != 0 && j!= 0)){
-					if(i == j) indice[i][j] = indice[0][0] * (-1);
+				if(i >= indice && j >= indice){
+					indice[i][j] = indice[i][j] * (-1);
 					else indice[i][j] = indice[0][0];
 				}
 		}
 
 		i = indice +1;
 		j = indice +1;
-		indice = indice * 2 - 1; 		
+		indice = indice * 2 - 1;
 
 	}
 }
@@ -87,5 +82,3 @@ int main(){
 	return 1;
 
 }
-
-
