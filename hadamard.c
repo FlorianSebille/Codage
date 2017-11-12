@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
-
+#include <math.h> 
 
 int TailleMatrice(int NbUtilisateur){
 
@@ -21,16 +20,18 @@ int TailleMatrice(int NbUtilisateur){
 
 }
 
-
-void MatHadamardCreer(int NbUtilisateur){
+int ** MatHadamardCreer(int NbUtilisateur){
 
 	int i, j;
-
 	int indice = 2;
-
 	int taille = TailleMatrice(NbUtilisateur);
 
-	int M[taille][taille];
+	int ** M = (int **) malloc(taille * sizeof(int *));
+	int row;
+
+	for (row = 0; row < taille; row++) {
+        M[row] = (int *)malloc(taille * sizeof(int));
+    }
 
 	M[0][0] = 1;
 	M[0][1] = 1;
@@ -42,19 +43,27 @@ void MatHadamardCreer(int NbUtilisateur){
 		for(i = 0; i < indice * 2; i++){
 			for(j = 0; j < indice * 2; j++){
 
-					if(i >= indice && j < indice){
-						M[i][j] = M[i-indice][j];
-					}else if(j >= indice && i < indice){
-						M[i][j] = M[i][j-indice];
-					}else if (i >= indice && j >= indice){
-						M[i][j] = M[i-indice][j-indice] * (-1);
-					}
+				if(i >= indice && j < indice){
+					M[i][j] = M[i-indice][j];
+				}else if(j >= indice && i < indice){
+					M[i][j] = M[i][j-indice];
+				}else if (i >= indice && j >= indice){
+					M[i][j] = M[i-indice][j-indice] * (-1);
+				}
 			}
 		}
 
 		indice = indice * 2;
 
 	}
+
+	return M;
+
+}
+
+void MatHadamardAfficher(int ** M, int taille){
+
+	int i, j;
 
 	for(i = 0; i < taille; i++){
 		for(j = 0; j < taille; j++){
@@ -63,14 +72,32 @@ void MatHadamardCreer(int NbUtilisateur){
 		}
 		printf("\n");
 	}
+}
 
+void MatHadamardSupp(int ** M, int taille){
+
+	int row;
+
+	for (row = 0; row < taille; row++) {
+         free(M[row]);
+    }
+
+    free(M);
 }
 
 
 
 int main(){
 
-	MatHadamardCreer(3);
+	int NbUtilisateurs = 5;
+
+	int taille = TailleMatrice(NbUtilisateurs);
+
+	int ** M = MatHadamardCreer(NbUtilisateurs);
+
+	MatHadamardAfficher(M,taille);
+
+	MatHadamardSupp(M,taille);
 
 	return 1;
 

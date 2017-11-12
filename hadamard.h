@@ -1,6 +1,11 @@
-#define H0 1
 
-int ** MatHadamardCreer(int NbUtilisateur);
+/* Fonctions utiles à la manipulation d'une matrice Hadamard */
 
-void MatHadamardAfficher(int ** Matrice, int taille);
+int TailleMatrice(int);
+
+int ** MatHadamardCreer(int);
+
+void MatHadamardAfficher(int **, int);
+
+void MatHadamardSupp(int **, int);
   
