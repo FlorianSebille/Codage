@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h> 
+#include <math.h>
 
 int TailleMatrice(int NbUtilisateur){
 
@@ -83,22 +83,4 @@ void MatHadamardSupp(int ** M, int taille){
     }
 
     free(M);
-}
-
-
-
-int main(){
-
-	int NbUtilisateurs = 5;
-
-	int taille = TailleMatrice(NbUtilisateurs);
-
-	int ** M = MatHadamardCreer(NbUtilisateurs);
-
-	MatHadamardAfficher(M,taille);
-
-	MatHadamardSupp(M,taille);
-
-	return 1;
-
 }
