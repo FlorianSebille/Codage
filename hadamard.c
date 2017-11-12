@@ -3,6 +3,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "hadamard.h"
+
 int TailleMatrice(int NbUtilisateur){
 
 	int i = 2;
@@ -30,8 +32,8 @@ int ** MatHadamardCreer(int NbUtilisateur){
 	int row;
 
 	for (row = 0; row < taille; row++) {
-        M[row] = (int *)malloc(taille * sizeof(int));
-    }
+  	M[row] = (int *)malloc(taille * sizeof(int));
+  }
 
 	M[0][0] = 1;
 	M[0][1] = 1;
