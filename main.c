@@ -29,11 +29,11 @@ int main(){
   sleep(1);
 
   printf("Affichage de la matrice créée:\n\n");
-  MatHadamardAfficher(mHadamard,tailleH);
+  MatriceAffichage(mHadamard, tailleH, tailleH,1);
 
   printf("\nAssignation des mots codes à chaque utilisateur ...\n\n");
   motcodeUsers = AssignUsers(nUsers, tailleH, mHadamard);
-  MotCodeAffichage(motcodeUsers, tailleH, nUsers);
+  MatriceAffichage(motcodeUsers, nUsers+1, tailleH,0);
 
   sleep(2);
 

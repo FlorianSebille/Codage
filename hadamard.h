@@ -1,4 +1,6 @@
 
+#include "matrice.h"
+
 /* Fonctions utiles à la manipulation d'une matrice Hadamard */
 
 int TailleMatrice(int);

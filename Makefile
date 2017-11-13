@@ -28,13 +28,13 @@ canal.o : canal.c canal.h
 hadamard.o : hadamard.c hadamard.h
 	gcc -c hadamard.c -o hadamard.o
 
-#       Fonctions generales sur les matrices en dynamique
+#	Fonctions generales sur les matrices en dynamique
 #
 
 matrice.o : matrice.c matrice.h
-        gcc -c matrice.c -o matrice.o
-	
-	
+	gcc -c matrice.c -o matrice.o
+
+
 #----------------------------
 # Gestion generale du projet
 #----------------------------

@@ -3,32 +3,49 @@
 
 #include "matrice.h"
 
-int ** MatriceCREER(int colones, int lignes){
- int i;
- int ** mat = (int **) malloc(sizeof(int*)*lignes);
- for(i=0;i<lignes;i++){
-  mat[i] = (int *) malloc(sizeof(int)*colones);
- }
- return mat;
+/*  Fonction : MatriceCreer(...)
+ *  Création d'une matrice en dynamique
+ *  avec le nombre de lignes et de colones en paramètre
+*/
+int ** MatriceCreer(int colones, int lignes){
+  int i;
+  int ** mat = (int **) malloc(sizeof(int*)*lignes);
+  for(i=0;i<lignes;i++){
+    mat[i] = (int *) malloc(sizeof(int)*colones);
+  }
+  return mat;
 }
 
+/*  Fonction : MatriceDetruit(...)
+ *  destruction d'une matrice en dynamique
+ *  avec la matrice et le nombre de lignes en paramètre
+*/
 void MatriceDetruit(int ** mat, int lignes){
-    int i;
-    
-    for (i = 0; i < lignes; i++) {
-         free(mat[i]);
-    }
+  int i;
 
-    free(mat);
+  for (i = 0; i < lignes; i++) {
+    free(mat[i]);
+  }
+
+  free(mat);
 }
 
-void MatriceAffichage(int ** mat, int lignes, int colones){
+/*  Fonction : MatriceAffichage(...)
+ *  affichage d'une matrice
+ *  avec la matrice et le nombre de lignes et de colones en paramètre
+*/
+void MatriceAffichage(int ** mat, int lignes, int colones, int boolLigneZero){
   int i , j;
 
-  for(i = 0; i < lignes; i++)
+  if(boolLigneZero) /* Affichage ou non de la ligne 0 de la matrice */ 
+    i = 0;
+  else i = 1;
+
+  for( ; i < lignes; i++){
     for(j = 0; j < colones; j++)
       if(mat[i][j] == -1)
         printf("0 ");
       else printf("%i ", mat[i][j]);
     printf("\n");
+  }
 }
