@@ -6,8 +6,8 @@
 # Executables
 #-------------
 
-hadamard : main.o hadamard.o canal.o
-	gcc main.o hadamard.o canal.o -o hadamard
+hadamard : main.o hadamard.o canal.o matrice.o
+	gcc main.o hadamard.o canal.o matrice.o -o hadamard
 
 main.o : main.c
 	gcc -c main.c -o main.o
@@ -28,7 +28,13 @@ canal.o : canal.c canal.h
 hadamard.o : hadamard.c hadamard.h
 	gcc -c hadamard.c -o hadamard.o
 
+#       Fonctions generales sur les matrices en dynamique
+#
 
+matrice.o : matrice.c matrice.h
+        gcc -c matrice.c -o matrice.o
+	
+	
 #----------------------------
 # Gestion generale du projet
 #----------------------------
