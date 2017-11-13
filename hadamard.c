@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "hadamard.h"
+#include "matrice.h"
 
 int TailleMatrice(int NbUtilisateur){
 
