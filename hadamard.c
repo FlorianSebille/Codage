@@ -57,30 +57,6 @@ int ** MatHadamardCreer(int NbUtilisateur){
 	return M;
 }
 
-void MatHadamardAfficher(int ** M, int taille){
-
-	int i, j;
-
-	for(i = 0; i < taille; i++){
-		for(j = 0; j < taille; j++){
-			if(M[i][j] == -1) printf("0 ");
-			else printf("%d ",M[i][j]);
-		}
-		printf("\n");
-	}
-}
-
-void MatHadamardSupp(int ** M, int taille){
-
-	int row;
-
-	for (row = 0; row < taille; row++) {
-         free(M[row]);
-    }
-
-    free(M);
-}
-
 /*  Fonction : AssignUsers(...)
  *  Creer une matrice qui contient le nombre d'utilisateur lignes
  *  et pour chaque utilisateur on atribut une ligne de la matrice d'hadamard

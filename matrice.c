@@ -7,11 +7,11 @@
  *  Création d'une matrice en dynamique
  *  avec le nombre de lignes et de colones en paramètre
 */
-int ** MatriceCreer(int colones, int lignes){
+int ** MatriceCreer(int colonnes, int lignes){
   int i;
   int ** mat = (int **) malloc(sizeof(int*)*lignes);
   for(i=0;i<lignes;i++){
-    mat[i] = (int *) malloc(sizeof(int)*colones);
+    mat[i] = (int *) malloc(sizeof(int)*colonnes);
   }
   return mat;
 }
@@ -20,7 +20,7 @@ int ** MatriceCreer(int colones, int lignes){
  *  destruction d'une matrice en dynamique
  *  avec la matrice et le nombre de lignes en paramètre
 */
-void MatriceDetruit(int ** mat, int lignes){
+void MatriceDetruire(int ** mat, int lignes){
   int i;
 
   for (i = 0; i < lignes; i++) {
@@ -37,7 +37,7 @@ void MatriceDetruit(int ** mat, int lignes){
 void MatriceAffichage(int ** mat, int lignes, int colones, int boolLigneZero){
   int i , j;
 
-  if(boolLigneZero) /* Affichage ou non de la ligne 0 de la matrice */ 
+  if(boolLigneZero) /* Affichage ou non de la ligne 0 de la matrice */
     i = 0;
   else i = 1;
 

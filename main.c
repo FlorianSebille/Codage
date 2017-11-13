@@ -29,15 +29,15 @@ int main(){
   sleep(1);
 
   printf("Affichage de la matrice créée:\n\n");
-  MatriceAffichage(mHadamard, tailleH, tailleH,1);
+  MatriceAffichage(mHadamard, tailleH, tailleH,LIGNE_ZERO);
 
   printf("\nAssignation des mots codes à chaque utilisateur ...\n\n");
   motcodeUsers = AssignUsers(nUsers, tailleH, mHadamard);
-  MatriceAffichage(motcodeUsers, nUsers+1, tailleH,0);
+  MatriceAffichage(motcodeUsers, nUsers+1, tailleH,LIGNE_UN);
 
   sleep(2);
 
-  printf("Création de la matrice avec les mots codés ...\n\n");
+  printf("\nCréation de la matrice avec les mots codés ...\n\n");
 
   sleep(2);
 
@@ -57,7 +57,7 @@ int main(){
   */
   sleep(2);
 
-  printf("Destruction de la matrice avec les mots codés ... \n\n");
+  printf("\nDestruction de la matrice avec les mots codés ... \n\n");
   /*
     *
     * Fonction à faire
@@ -66,7 +66,7 @@ int main(){
   sleep(2);
 
   printf("Destruction de la matrice d'Hadamard ...\n\n");
-  MatHadamardSupp(mHadamard,tailleH);
+  MatriceDetruire(mHadamard,tailleH);
   sleep(1);
 
   printf("***** Fin du codeur *****\n");
