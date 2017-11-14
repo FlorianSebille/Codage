@@ -17,10 +17,16 @@ main.o : main.c
 #----------
 
 # CANAL
+#
+
+canal.o : canal_parfait.c canal.h
+	gcc -c canal_parfait.c -o canal.o
+
+#
 # "Parfait"
 
-canal.o : canal.c canal.h
-	gcc -c canal.c -o canal.o
+canal.h : canal_parfait.h
+		touch canal.h
 
 #	Générateur Matrice Hadamard
 #
