@@ -9,4 +9,6 @@ int ** MatHadamardCreer(int);
 
 int ** AssignUsers(int, int , int **);
 
-int ** CodageSeq(int **, int,int *, int, int);
+int ** CodageSeq(int **, int **, int, int, int);
+
+int ** SaisirMot(int, int);

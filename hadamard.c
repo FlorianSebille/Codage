@@ -65,7 +65,7 @@ int ** AssignUsers(int nbUser, int taille_mat, int ** mHadamard){
   int i, j;
   int User_courant;
 
-  int ** motcodeUser = MatriceCreer(taille_mat, nbUser+1);
+  int ** motcodeUser = MatriceCreer(nbUser+1, taille_mat);
 
   for(User_courant = 1,i = 0; User_courant <= nbUser; User_courant++, i++)
       for(j = 0; j < taille_mat; j++)
@@ -79,19 +79,44 @@ int ** AssignUsers(int nbUser, int taille_mat, int ** mHadamard){
  *  Creer une matrice qui contient le codage de chaque sequence
  *  envoyer par l'utilisateur
 */
-int ** CodageSeq(int ** motCode, int user,int seq[], int taille_seq, int taille_ligne){
-  int i, j;
+int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode, int nUsers){
 
-  int ** codeSeq = MatriceCreer(taille_ligne, taille_seq);
+  int ** codeSeq = MatriceCreer(nUsers, taille_mot * taille_motcode);
+	int i;
+	int j;
+	int l;
+	int k;
 
-  for(i = 0; i < taille_seq; i++){        /* pour chaque element binaire de la sequence */
-    if(seq[i] == 1){                      /* si l'element binaire est 1 on ne change pas le mot code*/
-      for(j = 0; j < taille_ligne; j++)
-        codeSeq[i][j] = motCode[user][j];
-    }else {                               /* si l'element binaire est -1 on inverse le mot code*/
-      for(j = 0; j < taille_ligne; j++)
-        codeSeq[i][j] = -motCode[user][j];
+	for(l = 0, k = 0; l < nUsers; l++){
+
+			for(i = 0; i < taille_mot; i++){
+
+				for(j = 0; j < taille_motcode; j++, k++){
+
+						if(mots[i][l] == -1) codeSeq[k][l] = -motCode[j][l];
+						else codeSeq[k][l] = motCode[j][l];
+
+				}
+			}
+	}
+
+	return codeSeq;
+
+}
+
+int ** SaisirMot(int l, int c){
+
+	int ** m = MatriceCreer(l,c);
+	int i,j;
+
+	for(i = 0; i < l; i++){
+    printf("Saisir mot utilisateur %i (suite de 0 ou de 1) de taille %i: \n",i,c);
+    for(j = 0; j < c; j++){
+      scanf("%i",&m[i][j]);
+			if(m[i][j] == 0) m[i][j] = -1;
     }
   }
-  return codeSeq;
+
+	return m;
+
 }

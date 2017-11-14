@@ -9,10 +9,12 @@
 
 int main(){
 
-  int nUsers, tailleH;
+  int nUsers, tailleH, mot_longueur, i, j;
   int ** mHadamard;
   int ** motcodeUsers;
   int ** codageSequences;
+  int ** mots;
+  int ** MatriceCanal;
 
   printf("***** Codeur de Hadamard *****\n\n");
 
@@ -20,7 +22,13 @@ int main(){
   scanf("%i",&nUsers);
   printf("\n");
 
-  printf("Definition d'une taille pour la matrice d'Hadamard ...\n\n");
+  printf("Saisir la longueur des mots: ");
+  scanf("%i",&mot_longueur);
+  printf("\n");
+
+  mots = SaisirMot(nUsers,mot_longueur);
+
+  printf("\nDefinition d'une taille pour la matrice d'Hadamard ...\n\n");
   tailleH = TailleMatrice(nUsers);
   sleep(1);
 
@@ -39,6 +47,8 @@ int main(){
 
   printf("\nCréation de la matrice avec les mots codés ...\n\n");
 
+  MatriceCanal = CodageSeq(motcodeUsers,mots,mot_longueur,tailleH,nUsers);
+  MatriceAffichage(MatriceCanal,nUsers, mot_longueur * tailleH,LIGNE_ZERO);
   sleep(2);
 
   printf("Passage dans le canal ...\n\n");

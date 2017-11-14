@@ -7,7 +7,7 @@
  *  Création d'une matrice en dynamique
  *  avec le nombre de lignes et de colones en paramètre
 */
-int ** MatriceCreer(int colonnes, int lignes){
+int ** MatriceCreer(int lignes, int colonnes){
   int i;
   int ** mat = (int **) malloc(sizeof(int*)*lignes);
   for(i=0;i<lignes;i++){
