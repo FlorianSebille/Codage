@@ -34,14 +34,10 @@ void MatriceDetruire(int ** mat, int lignes){
  *  affichage d'une matrice
  *  avec la matrice et le nombre de lignes et de colones en paramètre
 */
-void MatriceAffichage(int ** mat, int lignes, int colones, int boolLigneZero){
+void MatriceAffichage(int ** mat, int lignes, int colones){
   int i , j;
 
-  if(boolLigneZero) /* Affichage ou non de la ligne 0 de la matrice */
-    i = 0;
-  else i = 1;
-
-  for( ; i < lignes; i++){
+  for(i = 0; i < lignes; i++){
     for(j = 0; j < colones; j++)
       if(mat[i][j] == -1)
         printf("0 ");

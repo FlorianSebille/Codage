@@ -37,26 +37,22 @@ int main(){
   sleep(1);
 
   printf("Affichage de la matrice créée:\n\n");
-  MatriceAffichage(mHadamard, tailleH, tailleH,LIGNE_ZERO);
+  MatriceAffichage(mHadamard, tailleH, tailleH);
 
   printf("\nAssignation des mots codes à chaque utilisateur ...\n\n");
   motcodeUsers = AssignUsers(nUsers, tailleH, mHadamard);
-  MatriceAffichage(motcodeUsers, nUsers+1, tailleH,LIGNE_UN);
+  MatriceAffichage(motcodeUsers, nUsers, tailleH);
 
   sleep(2);
 
   printf("\nCréation de la matrice avec les mots codés ...\n\n");
 
   MatriceCanal = CodageSeq(motcodeUsers,mots,mot_longueur,tailleH,nUsers);
-  MatriceAffichage(MatriceCanal,nUsers, mot_longueur * tailleH,LIGNE_ZERO);
+  MatriceAffichage(MatriceCanal,nUsers, mot_longueur * tailleH);
   sleep(2);
 
-  printf("Passage dans le canal ...\n\n");
-  /*
-    *
-    * Fonction à faire
-    *
-  */
+  printf("\nPassage dans le canal ...\n\n");
+  MatriceCanal = canalParfait(MatriceCanal);
   sleep(2);
 
   printf("Affichage des mots decodé de chaque utilisateur: \n\n");

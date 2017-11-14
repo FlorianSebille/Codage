@@ -7,7 +7,7 @@
 #-------------
 
 hadamard : main.o hadamard.o canal.o matrice.o
-	gcc main.o hadamard.o canal.o matrice.o -o hadamard
+	gcc main.o hadamard.o canal.o matrice.o -o hadamard -lm
 
 main.o : main.c
 	gcc -c main.c -o main.o

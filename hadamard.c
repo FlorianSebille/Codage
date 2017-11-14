@@ -62,14 +62,14 @@ int ** MatHadamardCreer(int NbUtilisateur){
  *  et pour chaque utilisateur on atribut une ligne de la matrice d'hadamard
 */
 int ** AssignUsers(int nbUser, int taille_mat, int ** mHadamard){
-  int i, j;
+  int j;
   int User_courant;
 
-  int ** motcodeUser = MatriceCreer(nbUser+1, taille_mat);
+  int ** motcodeUser = MatriceCreer(nbUser, taille_mat);
 
-  for(User_courant = 1,i = 0; User_courant <= nbUser; User_courant++, i++)
+  for(User_courant = 0; User_courant < nbUser; User_courant++)
       for(j = 0; j < taille_mat; j++)
-        motcodeUser[User_courant][j] = mHadamard[i][j];
+        motcodeUser[User_courant][j] = mHadamard[User_courant][j];
 
   return motcodeUser;
 }
@@ -81,7 +81,7 @@ int ** AssignUsers(int nbUser, int taille_mat, int ** mHadamard){
 */
 int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode, int nUsers){
 
-  int ** codeSeq = MatriceCreer(nUsers, taille_mot * taille_motcode);
+  int ** codeSeq = MatriceCreer(nUsers, (taille_mot * taille_motcode));
 	int i;
 	int j;
 	int l;
@@ -92,9 +92,9 @@ int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode
 			for(i = 0; i < taille_mot; i++){
 
 				for(j = 0; j < taille_motcode; j++, k++){
-
-						if(mots[i][l] == -1) codeSeq[k][l] = -motCode[j][l];
-						else codeSeq[k][l] = motCode[j][l];
+						/*printf("#####\nl : %i\nj : %i\ni : %i\nk : %i\n#####\n",l,j,i,k);*/
+						if(mots[i][l] == -1) codeSeq[l][k] = -motCode[l][j];
+						else codeSeq[l][k] = motCode[l][j];
 
 				}
 			}
