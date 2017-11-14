@@ -79,7 +79,7 @@ int ** AssignUsers(int nbUser, int taille_mat, int ** mHadamard){
  *  Creer une matrice qui contient le codage de chaque sequence
  *  envoyer par l'utilisateur
 */
-int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode, int nUsers){
+/*int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode, int nUsers){
 
   int ** codeSeq = MatriceCreer(nUsers, (taille_mot * taille_motcode));
 	int i;
@@ -92,7 +92,7 @@ int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode
 			for(i = 0; i < taille_mot; i++){
 
 				for(j = 0; j < taille_motcode; j++, k++){
-						/*printf("#####\nl : %i\nj : %i\ni : %i\nk : %i\n#####\n",l,j,i,k);*/
+						printf("#####\nl : %i\nj : %i\ni : %i\nk : %i\n#####\n",l,j,i,k);
 						if(mots[i][l] == -1) codeSeq[l][k] = -motCode[l][j];
 						else codeSeq[l][k] = motCode[l][j];
 
@@ -102,7 +102,40 @@ int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode
 
 	return codeSeq;
 
+}*/
+
+int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode, int nUsers){
+
+  int ** codeSeq = MatriceCreer(nUsers, (taille_mot * taille_motcode));
+
+	int indice_mot;
+
+	int User_courant;
+	int indice_motCode;
+
+	int indice_sequence;
+
+	for(User_courant = 0; User_courant < nUsers; User_courant++){
+
+		for(indice_mot = 0; indice_mot < taille_mot; indice_mot++){
+			/*printf("case mot : %i\n", mots[User_courant][indice_mot]);*/
+			for(indice_sequence = 0, indice_motCode = 0; indice_sequence < (taille_mot * taille_motcode); indice_sequence++, indice_motCode++){
+
+				if(indice_motCode == taille_motcode)
+					indice_motCode = 0;
+
+				if(mots[User_courant][indice_mot] == -1)
+					codeSeq[User_courant][indice_sequence] = -(motCode[User_courant][indice_motCode]);
+				else
+					codeSeq[User_courant][indice_sequence] = motCode[User_courant][indice_motCode];
+			}
+		}
+	}
+
+	return codeSeq;
+
 }
+
 
 int ** SaisirMot(int l, int c){
 
