@@ -132,27 +132,48 @@ int ** SaisirMot(int l, int c){
 }
 
 
-int * DecoderMot(int * tab, int ** tab1){
-	/* A Faire*/
+void DecoderMot(int * mat, int taille_mat, int ** motcode, int taille_motcode, int User_courant, int taille_mot, int * mots_decoder){
+	int i, j, k;
+
+	int somme = 0;
+	int val;
+
+	for(i = 0, j = 0; j < taille_mat; i++){
+
+		for(k = 0; k < taille_motcode; k++, j++)
+			somme += ( mat[j] * motcode[User_courant][k] );
+
+		val = somme / taille_motcode;
+		mots_decoder[i] = val;
+		somme = 0;
+
+	}
+
 }
 
 /*  Fonction : Decodage(...)
  *  Creer une un tableau qui contient la somme de toutes les colonnes de la matrice codeseq
 */
-int ** Decodage(int ** seq,int taille_ligne, int nb_lignes){
+int ** Decodage(int ** seq, int nb_user, int ** motcode, int taille_motcode, int taille_mot){
 
 	int i, j;
-
+	int user;
+	int taille_ligne = taille_mot * taille_motcode;
 	int mat[taille_ligne];
+	int ** motsdecoder = MatriceCreer(nb_user, taille_mot);
 
 	for(i = 0; i < taille_ligne; i++)
 		mat[i] = 0;
 
 	for(i = 0; i < taille_ligne; i++){
-		for(j = 0; j < nb_lignes; j++){
+		for(j = 0; j < nb_user; j++){
 			mat[i] += seq[j][i];
 		}
 	}
 
-	/* A FINIR */
+	for(user = 0; user < nb_user; user++){
+		DecoderMot(mat, taille_ligne, motcode, taille_motcode, user, taille_mot, motsdecoder[user]);
+	}
+
+	return motsdecoder;
 }

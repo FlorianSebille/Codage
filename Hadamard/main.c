@@ -11,9 +11,11 @@ int main(){
 
   int nUsers, tailleH, mot_longueur, i, j;
   int ** mHadamard;
-  int ** motcodeUsers;
-  int ** mots;
-  int ** MatriceCanal;
+  int ** MotCodeUsers;
+  int ** Mots;
+  int ** Entree_Canal;
+  int ** Sortie_Canal;
+  int ** MotsDecoder;
 
   printf("***** Codeur de Hadamard *****\n\n");
 
@@ -25,7 +27,7 @@ int main(){
   scanf("%i",&mot_longueur);
   printf("\n");
 
-  mots = SaisirMot(nUsers,mot_longueur);
+  Mots = SaisirMot(nUsers,mot_longueur);
 
   printf("\nDefinition d'une taille pour la matrice d'Hadamard ...\n\n");
   tailleH = TailleMatrice(nUsers);
@@ -39,19 +41,20 @@ int main(){
   MatriceAffichage(mHadamard, tailleH, tailleH);
 
   printf("\nAssignation des mots codes à chaque utilisateur ...\n\n");
-  motcodeUsers = AssignUsers(nUsers, tailleH, mHadamard);
-  MatriceAffichage(motcodeUsers, nUsers, tailleH);
+  MotCodeUsers = AssignUsers(nUsers, tailleH, mHadamard);
+  MatriceAffichage(MotCodeUsers, nUsers, tailleH);
 
   sleep(2);
 
   printf("\nCréation de la matrice avec les mots codés ...\n\n");
 
-  MatriceCanal = CodageSeq(motcodeUsers,mots,mot_longueur,tailleH,nUsers);
-  MatriceAffichage(MatriceCanal,nUsers, mot_longueur * tailleH);
+  Entree_Canal = CodageSeq(MotCodeUsers,Mots,mot_longueur,tailleH,nUsers);
+  MatriceAffichage(Entree_Canal,nUsers, mot_longueur * tailleH);
   sleep(2);
 
   printf("\nPassage dans le canal ...\n\n");
-  MatriceCanal = canalParfait(MatriceCanal);
+  Sortie_Canal = MatriceCreer(nUsers, (mot_longueur * tailleH));
+  Sortie_Canal = canalParfait(Entree_Canal);
   sleep(2);
 
   printf("Affichage des mots decodé de chaque utilisateur: \n\n");
@@ -60,12 +63,15 @@ int main(){
     * Fonction(s) à faire
     *
   */
+  MotsDecoder = Decodage(Entree_Canal, nUsers, MotCodeUsers, tailleH, mot_longueur);
+  MatriceAffichage(MotsDecoder,nUsers, mot_longueur);
   sleep(2);
 
   printf("\nDestruction de la matrice avec les mots codés ... \n\n");
-  MatriceDetruire(MatriceCanal,nUsers);
-  MatriceDetruire(motcodeUsers,nUsers);
-  MatriceDetruire(mots,nUsers);
+  MatriceDetruire(MotsDecoder,nUsers);
+  MatriceDetruire(Entree_Canal,nUsers);
+  MatriceDetruire(MotCodeUsers,nUsers);
+  MatriceDetruire(Mots,nUsers);
 
   sleep(2);
 
