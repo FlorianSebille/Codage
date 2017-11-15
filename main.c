@@ -12,7 +12,6 @@ int main(){
   int nUsers, tailleH, mot_longueur, i, j;
   int ** mHadamard;
   int ** motcodeUsers;
-  int ** codageSequences;
   int ** mots;
   int ** MatriceCanal;
 
@@ -64,11 +63,10 @@ int main(){
   sleep(2);
 
   printf("\nDestruction de la matrice avec les mots codés ... \n\n");
-  /*
-    *
-    * Fonction à faire
-    *
-  */
+  MatriceDetruire(mCanal,nUsers);
+  MatriceDetruire(motcodeUsers,nUsers);
+  MatriceDetruire(mots,nUsers);
+
   sleep(2);
 
   printf("Destruction de la matrice d'Hadamard ...\n\n");
