@@ -63,7 +63,7 @@ int main(){
   sleep(2);
 
   printf("\nDestruction de la matrice avec les mots codés ... \n\n");
-  MatriceDetruire(mCanal,nUsers);
+  MatriceDetruire(MatriceCanal,nUsers);
   MatriceDetruire(motcodeUsers,nUsers);
   MatriceDetruire(mots,nUsers);
 

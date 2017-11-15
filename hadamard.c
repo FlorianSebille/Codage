@@ -130,3 +130,29 @@ int ** SaisirMot(int l, int c){
 	return m;
 
 }
+
+
+int * DecoderMot(int * tab, int ** tab){
+	/* A Faire*/
+}
+
+/*  Fonction : Decodage(...)
+ *  Creer une un tableau qui contient la somme de toutes les colonnes de la matrice codeseq
+*/
+int ** Decodage(int ** seq,int taille_ligne, int nb_lignes){
+
+	int i, j;
+
+	int mat[taille_ligne];
+
+	for(i = 0; i < taille_ligne; i++)
+		mat[i] = 0;
+
+	for(i = 0; i < taille_ligne; i++){
+		for(j = 0; j < nb_lignes; j++){
+			mat[i] += seq[j][i];
+		}
+	}
+
+	/* A FINIR */
+}
