@@ -132,7 +132,7 @@ int ** SaisirMot(int l, int c){
 }
 
 
-int * DecoderMot(int * tab, int ** tab){
+int * DecoderMot(int * tab, int ** tab1){
 	/* A Faire*/
 }
 
