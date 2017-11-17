@@ -1,6 +1,8 @@
 #define VALEUR_INIT 1
 #define ENTREE_SORTIE_REGISTRE 4
 
+/* Test */
+
 /*
 *   colonne 0 : Sortie XOR
 *   colonne 1 : Entree XOR
