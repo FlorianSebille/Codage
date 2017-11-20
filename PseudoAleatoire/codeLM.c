@@ -3,8 +3,6 @@
 #include <math.h>
 #include <time.h>
 
-
-#define VALEUR_INIT 1
 #define ENTREE_SORTIE_REGISTRE 4
 
 /*
@@ -20,6 +18,17 @@
 *   ligne n-1       Dernier étage du registre -> sortie
 */
 
+void AfficherTable(int ** table1, int nb_etages){
+
+  int i, j;
+
+  for(i = 0; i < nb_etages; i++){
+    for(j = 0; j < ENTREE_SORTIE_REGISTRE; j++){
+      printf("%i ",table1[i][j]);
+    }
+    printf("\n");
+  }
+}
 
 int ** creerTableEtages(int nombre_etages){
 
@@ -76,15 +85,15 @@ void actionDecalage(int ** table, int ** table_copie, int nombre_etages, int * s
         table[i][2] = table[i][3];
         table[i][3] = table_copie[i][0];
         table[i+1][3] = table_copie[i][2];
-      }else if(i < (nombre_etages - 2)){
-        table[i-1][1] = table[i][0];
-        table[i][0] = table[i][1] ^ table[i][2];
-        table[i+1][3] = table[i][2];
-        table[i][2] = table_copie[i][3];
-      }else if( i == (nombre_etages - 1)){
+      }else if( i == nombre_etages - 1){
         table[i-1][1] = table[i][0];
         (*sortie) = table[i][2];
         table[i][0] = table[i][2];
+        table[i][2] = table_copie[i][3];
+      }else{
+        table[i-1][1] = table[i][0];
+        table[i][0] = table[i][1] ^ table[i][2];
+        table[i+1][3] = table[i][2];
         table[i][2] = table_copie[i][3];
       }
     }
@@ -102,21 +111,16 @@ int main(){
 
   initRegistre(table1,nb_etages);
   initRegistre(table2,nb_etages);
-
-  for(i = 0; i < nb_etages; i++){
-    for(j = 0; j < ENTREE_SORTIE_REGISTRE; j++){
-      printf("%i ",table1[i][j]);
-    }
-    printf("\n");
-  }
+  CopieTable(table2,table1,nb_etages);
 
   printf("\nSortie du registre: \n\n");
 
   for(i = 0; i < (pow(2,nb_etages) - 1); i++){
+
     actionDecalage(table1, table2, nb_etages, &sortie);
     CopieTable(table2,table1,nb_etages);
     if(i != 0)
-      printf("%i ",sortie);
+     printf("%i ",sortie);
   }
 
   printf("\n\n");
