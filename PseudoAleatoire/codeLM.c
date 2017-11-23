@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-
 #define ENTREE_SORTIE_REGISTRE 4
 
 /*
@@ -18,111 +17,55 @@
 *   ligne n-1       Dernier étage du registre -> sortie
 */
 
-void afficherTable(int ** table1, int nb_etages){
-
-  int i, j;
-
-  for(i = 0; i < nb_etages; i++){
-    for(j = 0; j < ENTREE_SORTIE_REGISTRE; j++){
-      printf("%i ",table1[i][j]);
-    }
-    printf("\n");
-  }
-}
-
-int ** creerTableEtages(int nombre_etages){
-
-  /* Créer une table à n étages pour un registre */
+void afficherTable(int * table, int * vecteur){
 
   int i;
-  int ** table = (int **) malloc(sizeof(int*)*nombre_etages);
-  for(i=0;i<nombre_etages;i++){
-    table[i] = (int *) malloc(sizeof(int)*ENTREE_SORTIE_REGISTRE);
+  for(i = 0; i < vecteur[0]; i++){
+    printf("%i ",table[i]);
   }
-  return table;
-
 }
 
-void initRegistre(int ** table, int nombre_etages){
+void initRegistre(int * table, int * vecteur){
 
   /* Initialise la table du registre */
 
-  int i, j;
-  for(i = 0; i < nombre_etages; i++){
-    for(j = 0; j < ENTREE_SORTIE_REGISTRE; j++){
-      if(j == 3)
-        table[i][j] = 1;
-      else if(i == nombre_etages - 1 && j == 1)
-        table[i][j] = -1;
-      else
-        table[i][j] = 0;
-    }
+  int i;
+  for(i = 0; i < vecteur[0]; i++){
+    table[i] = 1;
   }
 }
 
-void copieTable(int ** table1, int ** table2, int nombre_etages){
-
-  /* Copie une table à l'identique */
-
-  int i, j;
-  for(i = 0; i < nombre_etages; i++){
-    for(j = 0; j < ENTREE_SORTIE_REGISTRE; j++){
-      table1[i][j] = table2[i][j];
-    }
-  }
-}
-
-void actionDecalage(int ** table, int ** table_copie, int nombre_etages, int * sortie){
+void actionDecalage(int * table, int * vecteur, int nb_elem_vecteur, int * sortie){
 
   /* Actionne le registre pour 1 décalage */
 
   int i, j;
+  int res_xor = table[vecteur[0]-1];
+  (*sortie) = table[vecteur[0]-1];
 
-  for(i = 0; i < nombre_etages; i++){
+  for(i = 1; i < nb_elem_vecteur; i++){                  // On effectue un XOR entre tous les étages indiqués
+    res_xor = res_xor ^ table[vecteur[i]-1];
+  }
 
-      if(i == 0){
-        table[i][0] = table[i][1] ^ table[i][2];
-        table[i][2] = table[i][3];
-        table[i][3] = table_copie[i][0];
-        table[i+1][3] = table_copie[i][2];
-      }else if( i == nombre_etages - 1){
-        table[i-1][1] = table[i][0];
-        (*sortie) = table[i][2];
-        table[i][0] = table[i][2];
-        table[i][2] = table_copie[i][3];
-      }else{
-        table[i-1][1] = table[i][0];
-        table[i][0] = table[i][1] ^ table[i][2];
-        table[i+1][3] = table[i][2];
-        table[i][2] = table_copie[i][3];
-      }
-    }
+  for(i = vecteur[0] - 1; i > 0; i--){                  // On decale tous vers la droite
+    table[i] = table[i-1];
+  }
+
+  table[0] = res_xor;                                   // On entre la nouvelle entrée
+
 }
 
-void actionRegistre(int nb_etages){
-
-  srand(time(NULL));
+void actionRegistre(int * vecteur, int nb_elem_vecteur, int * resultat){
 
   int i,j;
   int sortie;
-  int ** table1 = creerTableEtages(nb_etages);
-  int ** table2 = creerTableEtages(nb_etages);
+  int table[vecteur[0]];
 
-  initRegistre(table1,nb_etages);
-  initRegistre(table2,nb_etages);
-  copieTable(table2,table1,nb_etages);
+  initRegistre(table,vecteur);
 
-  printf("\nSortie du registre: \n\n");
+  for(i = 0; i < (pow(2,vecteur[0]) - 1); i++){
 
-  for(i = 0; i < (pow(2,nb_etages) - 1); i++){
-
-    actionDecalage(table1, table2, nb_etages, &sortie);
-    copieTable(table2,table1,nb_etages);
-    printf("%i ",sortie);
+    actionDecalage(table, vecteur, nb_elem_vecteur, &sortie);
+    resultat[i] = sortie;
   }
-  printf("\n\n");
-}
-
-int main(){
-  actionRegistre(3);
 }
