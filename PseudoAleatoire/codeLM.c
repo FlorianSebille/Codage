@@ -18,7 +18,7 @@
 *   ligne n-1       Dernier étage du registre -> sortie
 */
 
-void AfficherTable(int ** table1, int nb_etages){
+void afficherTable(int ** table1, int nb_etages){
 
   int i, j;
 
@@ -51,7 +51,7 @@ void initRegistre(int ** table, int nombre_etages){
   for(i = 0; i < nombre_etages; i++){
     for(j = 0; j < ENTREE_SORTIE_REGISTRE; j++){
       if(j == 3)
-        table[i][j] = rand()%2;
+        table[i][j] = 1;
       else if(i == nombre_etages - 1 && j == 1)
         table[i][j] = -1;
       else
@@ -60,7 +60,7 @@ void initRegistre(int ** table, int nombre_etages){
   }
 }
 
-void CopieTable(int ** table1, int ** table2, int nombre_etages){
+void copieTable(int ** table1, int ** table2, int nombre_etages){
 
   /* Copie une table à l'identique */
 
@@ -99,30 +99,30 @@ void actionDecalage(int ** table, int ** table_copie, int nombre_etages, int * s
     }
 }
 
-int main(){
+void actionRegistre(int nb_etages){
 
   srand(time(NULL));
 
   int i,j;
   int sortie;
-  int nb_etages = 5;
   int ** table1 = creerTableEtages(nb_etages);
   int ** table2 = creerTableEtages(nb_etages);
 
   initRegistre(table1,nb_etages);
   initRegistre(table2,nb_etages);
-  CopieTable(table2,table1,nb_etages);
+  copieTable(table2,table1,nb_etages);
 
   printf("\nSortie du registre: \n\n");
 
   for(i = 0; i < (pow(2,nb_etages) - 1); i++){
 
     actionDecalage(table1, table2, nb_etages, &sortie);
-    CopieTable(table2,table1,nb_etages);
-    if(i != 0)
-     printf("%i ",sortie);
+    copieTable(table2,table1,nb_etages);
+    printf("%i ",sortie);
   }
-
   printf("\n\n");
+}
 
+int main(){
+  actionRegistre(3);
 }
