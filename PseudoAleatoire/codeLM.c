@@ -39,7 +39,7 @@ void actionDecalage(int * table, int * vecteur, int nb_elem_vecteur, int * sorti
 
   /* Actionne le registre pour 1 décalage */
 
-  int i, j;
+  int i;
   int res_xor = table[vecteur[0]-1];
   (*sortie) = table[vecteur[0]-1];
 
@@ -57,7 +57,7 @@ void actionDecalage(int * table, int * vecteur, int nb_elem_vecteur, int * sorti
 
 void actionRegistre(int * vecteur, int nb_elem_vecteur, int * resultat){
 
-  int i,j;
+  int i;
   int sortie;
   int table[vecteur[0]];
 

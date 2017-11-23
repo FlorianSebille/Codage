@@ -32,4 +32,4 @@ codeGold.o : codeGold.c codeGold.h
 all : aleatoire
 
 clean :
-		rm *.o
+	rm *.o
