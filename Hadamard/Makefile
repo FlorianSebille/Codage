@@ -37,8 +37,8 @@ hadamard.o : hadamard.c hadamard.h
 #	Fonctions generales sur les matrices en dynamique
 #
 
-matrice.o : matrice.c matrice.h
-	gcc -c matrice.c -o matrice.o
+matrice.o : ../Matrice/matrice.c ../Matrice/matrice.h
+	gcc -c ../Matrice/matrice.c -o matrice.o
 
 
 #----------------------------

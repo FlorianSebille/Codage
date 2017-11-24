@@ -1,5 +1,5 @@
 
-#include "matrice.h"
+#include "../Matrice/matrice.h"
 
 /* Fonctions utiles à la manipulation d'une matrice Hadamard */
 

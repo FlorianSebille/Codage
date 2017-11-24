@@ -9,7 +9,9 @@
 
 int main(){
 
-  int nUsers, tailleH, mot_longueur, i, j;
+  int nUsers, tailleH, mot_longueur;
+  //int i, j;
+
   int ** mHadamard;
   int ** MotCodeUsers;
   int ** Mots;
@@ -63,7 +65,7 @@ int main(){
     * Fonction(s) à faire
     *
   */
-  MotsDecoder = Decodage(Entree_Canal, nUsers, MotCodeUsers, tailleH, mot_longueur);
+  MotsDecoder = Decodage(Sortie_Canal, nUsers, MotCodeUsers, tailleH, mot_longueur);
   MatriceAffichage(MotsDecoder,nUsers, mot_longueur);
   sleep(2);
 
