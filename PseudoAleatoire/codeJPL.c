@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "../Matrice/matrice.h"
 
@@ -8,27 +9,40 @@
 
 #define LONG_REGISTRE 20
 
+/* On donne au codeur JPL une matrice qui contient ses polynomes générateur
+
+Ex: On souhaite créer un codeur JPL avec des séquences LM généré à partir de [2,1], [3,1] et [5,2]
+
+Matrice donné au codeur JPL:
+
+		2 | 2 | 1
+		2 | 3 | 1
+		2 | 5 | 2
+
+La première colonne correspond à la taille du vecteur associé à la ligne
+
+*/
+
 int pgcd(int nombre1, int nombre2){
   if(nombre2==0)
      return nombre1;
   return pgcd(nombre2, nombre1%nombre2);
 }
 
-int ** matriceRegistre(){
+int ** matriceRegistre(int * taille_matrice){
 
-    int nb_seq;
     int i, j;
     int nb_etage;
     int entree;
     int verif = 0;
 
     printf("Combien de séquences voulez vous ?\nNombre de séquences : ");
-    scanf("%i",&nb_seq);
+    scanf("%i",taille_matrice);
 
-    int ** matrice = MatriceCreer(nb_seq, LONG_REGISTRE);
+    int ** matrice = MatriceCreer(*taille_matrice, LONG_REGISTRE);
 
     printf("veuillez saisir les pôlynomes de génération\n");
-    for(i = 0, j = 1; i < nb_seq; i++, j=1, verif = 0){
+    for(i = 0, j = 1; i < *taille_matrice; i++, j=1, verif = 0){
 
       do{
         printf("\nPolynôme %i : \nnombre d'étage : ",i+1);
@@ -57,40 +71,79 @@ int ** matriceRegistre(){
       matrice[i][0] = j;
 
     }
-    MatriceAffichage(matrice, nb_seq, LONG_REGISTRE);
+    MatriceAffichage(matrice, *taille_matrice, LONG_REGISTRE);
     return matrice;
 }
 
-/*void actionJpl(){
 
-  int i;
-  int resultat1[L];
-  int resultat2[L];
-  int resultat3[L];
-
-  actionRegistre(vecteur1, nb_elem_vecteur1, resultat1);
-  actionRegistre(vecteur2, nb_elem_vecteur2, resultat2);
-  actionRegistre(vecteur3, nb_elem_vecteur3, resultat3);
-
-  printf("Première séquence\n\n");
-  afficherResultat(resultat1);
-  printf("\n\n");
-  printf("Deuxième séquence\n\n");
-  afficherResultat(resultat2);
-  printf("Troisième séquence\n\n");
-  afficherResultat(resultat3);
-  printf("\n\n");
-  printf("Séquence finale (XOR)\n\n");
-
-  XOR entre le premier et le deuxieme code LM
-  for(i = 0; i < L; i++){
-    tab[i] = resultat1[i] ^ resultat2[i];
-  }
-
-  XOR entre le resultat des deux premier et le troisième code LM
-  for(i = 0; i < L; i++){
-    tab[i] = tab[i] ^ resultat3[i];
-    printf("%i ",tab[i]);
-  }
+//Retourne le vecteur son son indice de taille
+//Ex:	[4,5,4,2,1] -> [5,4,2,1]
+//	[2,5,2] -> [5,2]
+int * troncVecteur(int * vecteur){
+	int i;
+	int * sortie = malloc(vecteur[0]* sizeof(int));
+	for(i = 0; i < vecteur[0]; i++){
+		sortie[i] = vecteur[i+1];
+	}
+	return sortie;
 }
-*/
+
+
+//Retourne la taille de la plus grande séquence possible -> max(L1,L2..Ln)
+int lg_max_sequence(int ** matrice, int taille_matrice){
+  int max = matrice[0][1];
+	int i;
+  	for(i = 1; i < taille_matrice; i++){
+   		if(max < matrice[i][1]) max = matrice[i][1];
+  	}
+  	return (pow(2,max)-1);
+}
+
+//Retourne la taille de la séquence finale -> L1*L2*..*Ln
+int lg_final_sequence(int ** matrice, int taille_matrice){
+	int cpt = 1;
+	int i;
+	for(i = 0; i < taille_matrice; i++){
+		cpt = cpt * pow(2,matrice[i][1])-1;
+	}
+	return cpt;
+}
+
+void fillSequence(int * sequence, int nb_colonnes, int taille_init){
+	int i, j;
+	for(i = taille_init, j = 0; i < nb_colonnes; i++, j++){
+		if(j == 3) j = 0;
+		sequence[i] = sequence[j];
+	}
+}
+
+//Retourne une séquence dans un tableau issu d'une matrice avec les vecteurs générateurs des séquences LM associés
+int * actionJPL(int ** matrice, int taille_matrice){
+
+	int i,j;
+
+	int lg_final = lg_final_sequence(matrice,taille_matrice);
+	int matrice_resultat[taille_matrice][lg_final];
+	int * tab_final = malloc(sizeof(int)*lg_final);
+
+	for(i = 0; i < taille_matrice; i++){
+		actionRegistre(troncVecteur(matrice[i]),matrice[i][0],matrice_resultat[i]);
+	}
+
+	for(i = 0; i < taille_matrice; i++){
+		fillSequence(matrice_resultat[i],lg_final,pow(2,matrice[i][0]-1));
+	}
+
+	for(i = 0; i < lg_final; i++){
+		tab_final[i] =  matrice_resultat[0][i]  ^ matrice_resultat[1][i];
+	}
+
+	for(j = 2; j < taille_matrice; j++){
+		for(i = 0; i < lg_final; i++){
+			tab_final[i] = tab_final[i] ^ matrice_resultat[j][i];
+		}
+	}
+
+	return tab_final;
+
+}
