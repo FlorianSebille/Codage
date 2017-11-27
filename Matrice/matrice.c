@@ -7,12 +7,13 @@
  *  Création d'une matrice en dynamique
  *  avec le nombre de lignes et de colones en paramètre
 */
-int ** MatriceCreer(int lignes, int colonnes){
+int ** MatriceCreer(int lignes, int colones){
   int i;
   int ** mat = (int **) malloc(sizeof(int*)*lignes);
   for(i=0;i<lignes;i++){
-    mat[i] = (int *) malloc(sizeof(int)*colonnes);
+    mat[i] = (int *) malloc(sizeof(int)*colones);
   }
+  MatriceRaz(mat, lignes, colones);
   return mat;
 }
 
@@ -44,4 +45,12 @@ void MatriceAffichage(int ** mat, int lignes, int colones){
       else printf("%i ", mat[i][j]);
     printf("\n");
   }
+}
+
+/* Mise a zero de toutes les cases de la matrice */
+void MatriceRaz(int ** mat, int lignes, int colones){
+  int i, j;
+  for(i = 0; i < lignes; i++)
+    for(j = 0; j < colones; j++)
+      mat[i][j] = 0;
 }
