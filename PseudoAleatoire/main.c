@@ -25,5 +25,5 @@ int main(){
   int * tab =  actionJPL(matrice, taille_matrice);
 
   for(i = 0;  i < long_tab; i++)
-    printf("case %i : %i\n", i, tab[i]);
+    printf("case %i : %i\n", i+1, tab[i]);
 }

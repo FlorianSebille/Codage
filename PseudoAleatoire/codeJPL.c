@@ -19,7 +19,7 @@ Matrice donné au codeur JPL:
 		2 | 3 | 1
 		2 | 5 | 2
 
-La première colonne correspond à la taille du vecteur associé à la ligne
+La première colonne correspond à la taille du vecteur associé à la ligne (nbEtages + nbPorteXOR)
 
 */
 
@@ -104,7 +104,7 @@ int lg_final_sequence(int ** matrice, int taille_matrice){
 	int cpt = 1;
 	int i;
 	for(i = 0; i < taille_matrice; i++){
-		cpt = cpt * pow(2,matrice[i][1])-1;
+		cpt = cpt * (pow(2,matrice[i][1]) -1);
 	}
 	return cpt;
 }
@@ -112,7 +112,7 @@ int lg_final_sequence(int ** matrice, int taille_matrice){
 void fillSequence(int * sequence, int nb_colonnes, int taille_init){
 	int i, j;
 	for(i = taille_init, j = 0; i < nb_colonnes; i++, j++){
-		if(j == 3) j = 0;
+		if(j == taille_init) j = 0;
 		sequence[i] = sequence[j];
 	}
 }
@@ -123,7 +123,8 @@ int * actionJPL(int ** matrice, int taille_matrice){
 	int i,j;
 
 	int lg_final = lg_final_sequence(matrice,taille_matrice);
-	int matrice_resultat[taille_matrice][lg_final];
+	int ** matrice_resultat = MatriceCreer(taille_matrice,lg_final);
+
 	int * tab_final = malloc(sizeof(int)*lg_final);
 
 	for(i = 0; i < taille_matrice; i++){
@@ -131,7 +132,7 @@ int * actionJPL(int ** matrice, int taille_matrice){
 	}
 
 	for(i = 0; i < taille_matrice; i++){
-		fillSequence(matrice_resultat[i],lg_final,pow(2,matrice[i][0]-1));
+		fillSequence(matrice_resultat[i],lg_final,pow(2,matrice[i][1]-1));
 	}
 
 	for(i = 0; i < lg_final; i++){
