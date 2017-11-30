@@ -2,7 +2,10 @@
 #include "codeGold.h"
 #include <stdio.h>
 
+
 void afficherResultat(int * resultat){
+  /* Affiche la sortie d'un code LM */
+
   int i;
   for(i = 0; i < L; i++){
     printf("%i ",resultat[i]);
@@ -10,6 +13,7 @@ void afficherResultat(int * resultat){
 }
 
 void actionGold(int * vecteur1, int nb_elem_vecteur1, int * vecteur2, int nb_elem_vecteur2, int * tab){
+  /* Simule un générateur de code de Gold */
 
   int i;
   int resultat1[L];

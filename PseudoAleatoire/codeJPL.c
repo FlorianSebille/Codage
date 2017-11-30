@@ -117,6 +117,8 @@ void fillSequence(int * sequence, int nb_colonnes, int taille_init){
 	}
 }
 
+
+//Simulateur d'un code JPL variable
 //Retourne une séquence dans un tableau issu d'une matrice avec les vecteurs générateurs des séquences LM associés
 int * actionJPL(int ** matrice, int taille_matrice){
 
