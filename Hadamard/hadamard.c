@@ -6,6 +6,10 @@
 
 #include "hadamard.h"
 
+/*  Fonction : TailleMatrice(...)
+ *  Fonction qui calcule la taille de la matrice en fonction
+ *	du nombre d'utilisateurs
+*/
 int TailleMatrice(int NbUtilisateur){
 
 	int i = 2;
@@ -23,6 +27,9 @@ int TailleMatrice(int NbUtilisateur){
 
 }
 
+/*  Fonction : MatHadamardCreer(...)
+ *  Création de la matrice d'hadamard
+*/
 int ** MatHadamardCreer(int NbUtilisateur){
 
 	int i, j;
@@ -114,6 +121,10 @@ int ** CodageSeq(int ** motCode, int ** mots, int taille_mot, int taille_motcode
 
 }
 
+/*  Fonction : SaisirMot(...)
+ *  Fonction qui demmande pour chaque utilisateur le mots
+ *	qu'il veut envoyer
+*/
 int ** SaisirMot(int l, int c){
 
 	int ** m = MatriceCreer(l,c);
@@ -131,7 +142,9 @@ int ** SaisirMot(int l, int c){
 
 }
 
-
+/*  Fonction : DecoderMot(...)
+ *  Fonction qui decode les mots après le passage dans le canal
+*/
 void DecoderMot(int * mat, int taille_mat, int ** motcode, int taille_motcode, int User_courant, int taille_mot, int * mots_decoder){
 	int i, j, k;
 
