@@ -60,11 +60,6 @@ int main(){
   sleep(2);
 
   printf("Affichage des mots decodé de chaque utilisateur: \n\n");
-  /*
-    *
-    * Fonction(s) à faire
-    *
-  */
   MotsDecoder = Decodage(Sortie_Canal, nUsers, MotCodeUsers, tailleH, mot_longueur);
   MatriceAffichage(MotsDecoder,nUsers, mot_longueur);
   sleep(2);

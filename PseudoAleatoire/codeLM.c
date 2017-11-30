@@ -19,6 +19,8 @@
 
 void afficherTable(int * table, int * vecteur){
 
+  /* Affiche une table en fonction de sa taille */
+
   int i;
   for(i = 0; i < vecteur[0]; i++){
     printf("%i ",table[i]);
@@ -56,6 +58,8 @@ void actionDecalage(int * table, int * vecteur, int nb_elem_vecteur, int * sorti
 }
 
 void actionRegistre(int * vecteur, int nb_elem_vecteur, int * resultat){
+
+  //construit la table complète de sortie (resultat) à partir d'un vecteur elementaire */
 
   int i;
   int sortie;
